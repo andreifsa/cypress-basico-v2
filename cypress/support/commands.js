@@ -1,7 +1,7 @@
-Cypress.Commands.add("fillMandatoryFieldsAndSubmit", () => {
-    cy.get('#firstName').type('Naruto')
-    cy.get('#lastName').type('Uzumaki')
-    cy.get('#email').type('narutouzumaki@gmail.com')
+Cypress.Commands.add("fillMandatoryFieldsAndSubmit", (firstName, lastName, email, phone) => {
+    cy.get('#firstName').type(firstName)
+    cy.get('#lastName').type(lastName)
+    cy.get('#email').type(email)
     cy.get('#open-text-area').type('Test')
     cy.get('button[type="submit"]').click()
     cy.get('.success').should('be.visible')
