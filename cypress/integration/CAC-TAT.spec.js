@@ -156,7 +156,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
           .should('not.be.checked')
         })
 
-        it.only('Select a file from fixtures folder', function(){
+        it('Select a file from fixtures folder', function(){
           cy.get('input[type="file"]')
             .should('not.have.value')
             .selectFile('cypress/fixtures/example.json')
@@ -181,5 +181,18 @@ describe('Central de Atendimento ao Cliente TAT', function() {
             .should(function($input)  {
               expect($input[0].files[0].name).to.equal('example.json')
             })
+        })
+
+        it('Verify if the privacy policy is opened on another page without the need for a click', function(){
+          cy.get('#privacy a')
+            .should('have.attr', 'target', '_blank')
+        })
+
+        it('Access the privacy policy page, remove the target, and then click on the link', function(){
+          cy.get('#privacy a')
+            .invoke('removeAttr', 'target')
+            .click()
+          cy.contains('Talking About Testing')
+            .should('be.visible')
         })
       })
