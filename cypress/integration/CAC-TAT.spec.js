@@ -26,13 +26,17 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
 
 
-    it('Should display an error message when submitting the form with an email in an invalid format', function() {
+    it.only('Should display an error message when submitting the form with an email in an invalid format', function() {
       cy.get('#email')
         .type('naruto#gmail')
       cy.get('button[type="submit"]')
         .click()
       cy.get('.error')
         .should('be.visible')
+      cy.clock()
+      cy.tick(3000)
+      cy.get('.error')
+        .should('not.be.visible')
     })
 
 
@@ -44,7 +48,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
 
 
-    it('Should display an error message when the phone number becomes mandatory but is not filled in before submitting the form', function() {
+    it.only('Should display an error message when the phone number becomes mandatory but is not filled in before submitting the form', function() {
       cy.get('#firstName')
         .type('Naruto')
       cy.get('#lastName')
@@ -59,6 +63,10 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         .click()
       cy.get('.error')
         .should('be.visible')
+      cy.clock()
+      cy.tick(3000)
+      cy.get('.error')
+        .should('not.be.visible')
     })
 
 
